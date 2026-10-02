@@ -1,6 +1,7 @@
 package com.merida.tecnm.market_backend_v2.persistence.entity;
 
 import jakarta.persistence.*;
+import java.util.*;
 
 
 @Entity
@@ -13,6 +14,9 @@ public class Cliente {
     private String apellidos;
     private String celular;
     private String direccion;
+
+    @OneToMany(mappedBy = "cliente")
+    private List<Compra> compras;
 
     @Column(name = "correo_electronico")
     private String correoElectronico;
