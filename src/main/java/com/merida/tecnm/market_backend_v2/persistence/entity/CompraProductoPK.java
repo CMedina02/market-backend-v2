@@ -1,8 +1,7 @@
 package com.merida.tecnm.market_backend_v2.persistence.entity;
-
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
 import java.io.Serializable;
-
 
 @Embeddable
 public class CompraProductoPK implements Serializable {
@@ -12,6 +11,8 @@ public class CompraProductoPK implements Serializable {
 
     @Column(name = "id_producto")
     private Integer idProducto;
+
+
 
     public Integer getIdCompra() {
         return idCompra;
@@ -28,7 +29,6 @@ public class CompraProductoPK implements Serializable {
     public void setIdProducto(Integer idProducto) {
         this.idProducto = idProducto;
     }
-
 
 
 }

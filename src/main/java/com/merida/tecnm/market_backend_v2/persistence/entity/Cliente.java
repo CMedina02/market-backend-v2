@@ -1,32 +1,40 @@
 package com.merida.tecnm.market_backend_v2.persistence.entity;
-
 import jakarta.persistence.*;
 import java.util.*;
 
-
 @Entity
-@Table(name="clientes")
+@Table(name = "clientes")
+
 public class Cliente {
 
+
     @Id
-    private Integer id;
+    private Integer Id;
     private String nombre;
     private String apellidos;
     private String celular;
     private String direccion;
 
     @OneToMany(mappedBy = "cliente")
-    private List<Compra> compras;
+        private List <Compra> compras;
 
     @Column(name = "correo_electronico")
     private String correoElectronico;
 
+    public String getApellidos() {
+        return apellidos;
+    }
+
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
+
     public Integer getId() {
-        return id;
+        return Id;
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        Id = id;
     }
 
     public String getNombre() {
@@ -35,14 +43,6 @@ public class Cliente {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getApellidos() {
-        return apellidos;
-    }
-
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
     }
 
     public String getCelular() {
@@ -77,3 +77,4 @@ public class Cliente {
         this.compras = compras;
     }
 }
+

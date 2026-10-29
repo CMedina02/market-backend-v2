@@ -1,15 +1,16 @@
 package com.merida.tecnm.market_backend_v2.persistence.entity;
-
 import jakarta.persistence.*;
+import java.util.*;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name="compra_producto")
+@Table(name = "compras_productos")
+
 public class CompraProducto {
 
-    //Viene de otra clase
+    //viene de otra clase
     @EmbeddedId
     private CompraProductoPK id;
-
 
     private Integer cantidad;
     private Double total;
@@ -20,8 +21,9 @@ public class CompraProducto {
     private Compra compra;
 
     @ManyToOne
-    @JoinColumn(name = "id_prodcuto", insertable = false, updatable = false)
+    @JoinColumn(name = "id_producto", insertable = false, updatable = false)
     private Producto producto;
+
 
     public CompraProductoPK getId() {
         return id;
@@ -55,7 +57,6 @@ public class CompraProducto {
         this.estado = estado;
     }
 
-
     public Compra getCompra() {
         return compra;
     }
@@ -71,4 +72,5 @@ public class CompraProducto {
     public void setProducto(Producto producto) {
         this.producto = producto;
     }
+
 }

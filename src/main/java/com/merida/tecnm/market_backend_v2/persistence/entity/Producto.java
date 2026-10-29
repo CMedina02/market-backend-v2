@@ -1,29 +1,36 @@
 package com.merida.tecnm.market_backend_v2.persistence.entity;
-import jakarta.persistence.*;
 
 import java.util.*;
+import jakarta.persistence.*;
+
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "productos")
+@Table (name="productos")
+
+
 public class Producto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_producto")
+    @Column (name = "id_producto")
     private Integer idProducto;
 
     private String nombre;
 
-    @Column(name = "id_categoria")
-    private Integer id_categoria;
+    @Column (name = "id_categoria")
+    private Integer idCategoria;
 
-    @Column(name = "codigo_barras")
+
+    private LocalDateTime fecha;
+
+    @Column (name = "codigo_barras")
     private String codigoBarras;
 
-    @Column(name = "precio_venta")
+    @Column (name = "precio_venta")
     private Double precioVenta;
 
-    @Column(name = "cantidad_stock")
+    @Column (name = "cantidad_stock")
     private Integer cantidadStock;
 
     private Boolean estado;
@@ -32,9 +39,9 @@ public class Producto {
     @JoinColumn(name = "id_categoria", insertable = false, updatable = false)
     private Categoria categoria;
 
+    //Ojito
     @OneToMany(mappedBy = "producto")
     private List<CompraProducto> compraProductos;
-
 
     public Integer getIdProducto() {
         return idProducto;
@@ -52,12 +59,20 @@ public class Producto {
         this.nombre = nombre;
     }
 
-    public Integer getId_categoria() {
-        return id_categoria;
+    public Integer getIdCategoria() {
+        return idCategoria;
     }
 
-    public void setId_categoria(Integer id_categoria) {
-        this.id_categoria = id_categoria;
+    public void setIdCategoria(Integer idCategoria) {
+        this.idCategoria = idCategoria;
+    }
+
+    public LocalDateTime getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(LocalDateTime fecha) {
+        this.fecha = fecha;
     }
 
     public String getCodigoBarras() {
