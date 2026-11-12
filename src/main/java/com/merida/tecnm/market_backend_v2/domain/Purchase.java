@@ -3,7 +3,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 public class Purchase {
-    private int purchaseId;
+    private Integer purchaseId;
     private String clientId;
     private LocalDateTime date;
     private String paymentMethod;
@@ -11,11 +11,11 @@ public class Purchase {
     private String state;
     private List<PurchaseItem> items;
 
-    public int getPurchaseId() {
+    public Integer getPurchaseId() {
         return purchaseId;
     }
 
-    public void setPurchaseId(int purchaseId) {
+    public void setPurchaseId(Integer purchaseId) {
         this.purchaseId = purchaseId;
     }
 
