@@ -33,6 +33,11 @@ public class ClienteRepository implements ClientRepository {
     }
 
     @Override
+    public Optional<Client> getByEmail(String email) {
+        return clienteCrudRepository.findByCorreoElectronicoIgnoreCase(email).map(mapper::toClient);
+    }
+
+    @Override
     public Client save(Client client) {
         Cliente cliente = mapper.toCliente(client);
         return mapper.toClient(clienteCrudRepository.save(cliente));

@@ -9,6 +9,7 @@ public interface ClientRepository {
 
     List<Client> getAll();
     Optional<Client> getClient(int clientId);
+    Optional<Client> getByEmail(String email);
     Client save(Client client);
     void delete(int clientId);
 }

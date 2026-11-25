@@ -15,6 +15,12 @@ public class Cliente {
     private String celular;
     private String direccion;
 
+    @Column(name = "password")
+    private String password;
+
+    public String getPassword() { return password; }
+    public void setPassword(String password) { this.password = password; }
+
     @OneToMany(mappedBy = "cliente")
         private List <Compra> compras;
 

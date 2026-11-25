@@ -62,7 +62,8 @@ public class ClientController {
                                               "lastName": "Perez",
                                               "phone": "9991234567",
                                               "address": "Calle 60 #123",
-                                              "email": "juan@example.com"
+                                              "email": "juan@example.com",
+                                              "password": "1234"
                                             }
                                             """
                             )
