@@ -7,10 +7,13 @@ Ejecuta una vez en la base de datos que usa tu perfil `dev`:
 ```sql
 ALTER TABLE clientes ADD COLUMN IF NOT EXISTS password VARCHAR(60);
 CREATE EXTENSION IF NOT EXISTS pgcrypto;
-UPDATE clientes SET password = crypt('1234', gen_salt('bf', 10)) WHERE id = 1;
+INSERT INTO clientes (id, nombre, apellidos, celular, direccion, correo_electronico, password)
+VALUES ('CLI-ADA12', 'Demo', 'JWT', 9991234567, 'Prueba local', 'ada12@example.test',
+        crypt('1234', gen_salt('bf', 10)))
+ON CONFLICT (id) DO UPDATE SET password = EXCLUDED.password;
 ```
 
-El último comando asigna la contraseña `1234` al cliente `id = 1` como hash BCrypt. Cambia el ID por uno que exista. Los clientes sin contraseña no pueden iniciar sesión hasta que se les asigne una. Las altas y cambios de contraseña realizados por la API usan `BCryptPasswordEncoder`. El hash mostrado como pista en la actividad no debe copiarse sin comprobar que `BCryptPasswordEncoder.matches("1234", hash)` devuelve `true`.
+El último comando crea un cliente de demostración con contraseña `1234` como hash BCrypt. Los clientes sin contraseña no pueden iniciar sesión hasta que se les asigne una. Las altas y cambios de contraseña realizados por la API usan `BCryptPasswordEncoder`. El hash mostrado como pista en la actividad no debe copiarse sin comprobar que `BCryptPasswordEncoder.matches("1234", hash)` devuelve `true`.
 
 ## Inicio
 
@@ -34,7 +37,7 @@ $env:APP_JWT_SECRET = 'cambia-esta-clave-por-una-aleatoria-de-32-bytes-o-mas'
 
 Abre `http://localhost:777/swagger-ui/index.html`:
 
-1. Ejecuta `POST /auth/login` con `{"username":"1","password":"1234"}`. La respuesta contiene `jwt`.
+1. Ejecuta `POST /auth/login` con `{"username":"CLI-ADA12","password":"1234"}`. La respuesta contiene `jwt`.
 2. Ejecuta `GET /clients` sin autorizar: debe devolver `401`.
 3. Pulsa **Authorize**, pega el token (Swagger añade `Bearer`), y repite `GET /clients`: debe devolver `200`.
 4. Prueba una contraseña incorrecta: `POST /auth/login` debe devolver `401`.

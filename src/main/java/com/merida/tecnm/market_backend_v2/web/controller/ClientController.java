@@ -40,7 +40,7 @@ public class ClientController {
     @ApiResponse(responseCode = "500", description = "Internal Server error")
     public ResponseEntity<Client> getClient(
             @Parameter(description = "ID of the client to be retrieved", example = "1", required = true)
-            @PathVariable("id") int clientId) {
+            @PathVariable("id") String clientId) {
         return clientService.getClient(clientId)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
@@ -57,7 +57,7 @@ public class ClientController {
                                     name = "Example Client",
                                     value = """
                                             {
-                                              "clientId": 1,
+                                              "clientId": "CLI-001",
                                               "firstName": "Juan",
                                               "lastName": "Perez",
                                               "phone": "9991234567",
@@ -84,7 +84,7 @@ public class ClientController {
     @ApiResponse(responseCode = "500", description = "Internal server error")
     public ResponseEntity<Client> update(
             @Parameter(description = "ID of the client to be updated", example = "1", required = true)
-            @PathVariable("id") int clientId,
+            @PathVariable("id") String clientId,
             @RequestBody Client client) {
         return clientService.update(clientId, client)
                 .map(ResponseEntity::ok)
@@ -98,7 +98,7 @@ public class ClientController {
     @ApiResponse(responseCode = "500", description = "Internal server error")
     public ResponseEntity<Void> delete(
             @Parameter(description = "ID of the client to be deleted", example = "1", required = true)
-            @PathVariable("id") int clientId) {
+            @PathVariable("id") String clientId) {
         if (clientService.delete(clientId)) {
             return ResponseEntity.ok().build();
         }

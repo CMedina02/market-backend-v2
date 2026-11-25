@@ -45,7 +45,7 @@ public class AuthController {
                                     name = "Login Credentials Example",
                                     value = """
                                             {
-                                              "username": "1",
+                                              "username": "CLI-001",
                                               "password": "1234"
                                             }
                                             """

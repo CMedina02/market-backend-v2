@@ -25,9 +25,9 @@ class ClientServiceTest {
         assertNotEquals("1234", created.getPassword());
         assertTrue(encoder.matches("1234", created.getPassword()));
 
-        when(repository.getClient(1)).thenReturn(Optional.of(created));
+        when(repository.getClient("CLI-001")).thenReturn(Optional.of(created));
         Client updated = new Client();
-        service.update(1, updated);
+        service.update("CLI-001", updated);
         assertEquals(created.getPassword(), updated.getPassword());
     }
 }

@@ -20,12 +20,7 @@ public class MarketUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<Client> clientOpt = Optional.empty();
-        try {
-            clientOpt = clientRepository.getClient(Integer.parseInt(username));
-        } catch (NumberFormatException ignored) {
-            // También se permite iniciar sesión con correo electrónico.
-        }
+        Optional<Client> clientOpt = clientRepository.getClient(username);
         if (clientOpt.isEmpty()) {
             clientOpt = clientRepository.getByEmail(username);
         }
@@ -39,6 +34,6 @@ public class MarketUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("El usuario no tiene una contraseña asignada.");
         }
 
-        return new User(client.getClientId().toString(), password, new ArrayList<>());
+        return new User(client.getClientId(), password, new ArrayList<>());
     }
 }

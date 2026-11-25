@@ -8,8 +8,8 @@ import java.util.Optional;
 public interface ClientRepository {
 
     List<Client> getAll();
-    Optional<Client> getClient(int clientId);
+    Optional<Client> getClient(String clientId);
     Optional<Client> getByEmail(String email);
     Client save(Client client);
-    void delete(int clientId);
+    void delete(String clientId);
 }

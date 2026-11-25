@@ -9,7 +9,7 @@ public class Cliente {
 
 
     @Id
-    private Integer Id;
+    private String Id;
     private String nombre;
     private String apellidos;
     private String celular;
@@ -35,11 +35,11 @@ public class Cliente {
         this.apellidos = apellidos;
     }
 
-    public Integer getId() {
+    public String getId() {
         return Id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         Id = id;
     }
 
