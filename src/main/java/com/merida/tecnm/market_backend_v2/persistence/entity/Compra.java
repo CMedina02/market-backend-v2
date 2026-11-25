@@ -12,16 +12,16 @@ public class Compra {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = "id compra")
+    @Column (name = "id_compra")
     private Integer idCompra;
 
-    @Column (name = "id cliente")
+    @Column (name = "id_cliente")
     private String idcliente;
 
 
     private LocalDateTime fecha;
 
-    @Column (name = "medio pago")
+    @Column (name = "medio_pago")
     private String medioPago;
 
 

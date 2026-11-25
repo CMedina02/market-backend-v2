@@ -12,7 +12,11 @@ import java.util.*;
 public class ProductService {
 
 
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
+
+    public ProductService(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
 
     public List<Product> getAll(){
         return productRepository.getAll();
@@ -30,12 +34,18 @@ public class ProductService {
         return productRepository.save(product);
     }
 
+    public Optional<Product> update(int productId, Product product) {
+        return productRepository.getProduct(productId).map(existing -> {
+            product.setProductId(productId);
+            return productRepository.save(product);
+        });
+    }
+
     public boolean delete(int productId){
         if(getProduct(productId).isPresent()){
             productRepository.delete(productId);
             return true;
-        }{
-            return false;
         }
+        return false;
     }
 }

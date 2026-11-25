@@ -14,10 +14,13 @@ import java.util.Optional;
 @Repository
 public class CompraRepository implements PurchaseRepository {
 
-    @Autowired
-    private CompraCrudRepository compraCrudRepository;
+    private final CompraCrudRepository compraCrudRepository;
+    private final PurchaseMapper mapper;
 
-    private PurchaseMapper mapper;
+    public CompraRepository(CompraCrudRepository compraCrudRepository, PurchaseMapper mapper) {
+        this.compraCrudRepository = compraCrudRepository;
+        this.mapper = mapper;
+    }
 
     @Override
     public List<Purchase> getAll() {
@@ -33,7 +36,9 @@ public class CompraRepository implements PurchaseRepository {
     @Override
     public Purchase save (Purchase purchase) {
         Compra compra = mapper.toCompra(purchase);
-        compra.getProductos().forEach(product -> product.setCompra(compra));
+        if (compra.getProductos() != null) {
+            compra.getProductos().forEach(product -> product.setCompra(compra));
+        }
         return mapper.toPurchase(compraCrudRepository.save(compra));
     }
 
